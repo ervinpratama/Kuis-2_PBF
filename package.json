@@ -1,13 +1,14 @@
 {
-  "name": "react-firestore",
+  "name": "react-firebase-auth",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^9.8.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "5.0.0"
+    "firebase": "^7.15.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -18,13 +19,16 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "bootstrap": "^4.1.3"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

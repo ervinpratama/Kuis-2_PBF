@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from '../Firebase';
+import app from "../base.js";
 import { Link } from 'react-router-dom';
 
 class Show extends Component {
@@ -13,7 +13,7 @@ class Show extends Component {
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('mahasiswas').doc(this.props.match.params.id);
+    const ref = app.firestore().collection('mahasiswas').doc(this.props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
@@ -28,7 +28,7 @@ class Show extends Component {
   }
 
   delete(id){
-    firebase.firestore().collection('mahasiswas').doc(id).delete().then(() => {
+    app.firestore().collection('mahasiswas').doc(id).delete().then(() => {
       console.log("Document successfully deleted!");
       this.props.history.push("/")
     }).catch((error) => {
@@ -55,11 +55,11 @@ class Show extends Component {
               <dt>Alamat:</dt>
               <dd>{this.state.mahasiswa.alamat}</dd>
               <dt>No.HP:</dt>
-              <dd>{this.state.mahasiswa.noHP}</dd>
+              <dd>{this.state.mahasiswa.hP}</dd>
               <dt>Tahun Angkatan:</dt>
-              <dd>{this.state.mahasiswa.thnAngkatan}</dd>
+              <dd>{this.state.mahasiswa.angkatan}</dd>
               <dt>Status Mahasiswa:</dt>
-              <dd>{this.state.mahasiswa.statusMhs}</dd>
+              <dd>{this.state.mahasiswa.status}</dd>
             </dl>
             <Link to={`/edit/${this.state.key}`} class="btn btn-success">Edit</Link>&nbsp;
             <button onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger">Delete</button>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from '../Firebase';
+import app from "../base";
 import { Link } from 'react-router-dom';
 
 class Edit extends Component {
@@ -11,14 +11,14 @@ class Edit extends Component {
       nim: '',
       nama: '',
       alamat: '',
-      noHP: '',
-      thnAngkatan: '',
-      statusMhs: '',
+      hpP: '',
+      angkatan: '',
+      status: '',
     };
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('mahasiswas').doc(this.props.match.params.id);
+    const ref = app.firestore().collection('mahasiswas').doc(this.props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {
         const mahasiswa = doc.data();
@@ -27,9 +27,9 @@ class Edit extends Component {
           nim: mahasiswa.nim,
           nama: mahasiswa.nama,
           alamat: mahasiswa.alamat,
-          noHP: mahasiswa.noHP,
-          thnAngkatan: mahasiswa.thnAngkatan,
-          statusMhs: mahasiswa.statusMhs,
+          hP: mahasiswa.hP,
+          angkatan: mahasiswa.angkatan,
+          status: mahasiswa.status,
         });
       } else {
         console.log("No such document!");
@@ -46,25 +46,25 @@ class Edit extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { nim, nama, alamat, noHP, thnAngkatan, statusMhs } = this.state;
+    const { nim, nama, alamat, hP, angkatan, status } = this.state;
 
-    const updateRef = firebase.firestore().collection('mahasiswas').doc(this.state.key);
+    const updateRef = app.firestore().collection('mahasiswas').doc(this.state.key);
     updateRef.set({
       nim,
       nama,
       alamat,
-      noHP,
-      thnAngkatan,
-      statusMhs
+      hP,
+      angkatan,
+      status
     }).then((docRef) => {
       this.setState({
         key: '',
         nim: '',
         nama: '',
         alamat: '',
-        noHP: '',
-        thnAngkatan: '',
-        statusMhs: '',
+        hP: '',
+        angkatan: '',
+        status: '',
       });
       this.props.history.push("/show/" + this.props.match.params.id)
     })
@@ -99,15 +99,15 @@ class Edit extends Component {
               </div>
               <div class="form-group">
                 <label for="noHP">No.HP:</label>
-                <input type="text" class="form-control" name="noHP" value={this.state.noHP} onChange={this.onChange} placeholder="No.HP" />
+                <input type="text" class="form-control" name="hP" value={this.state.hP} onChange={this.onChange} placeholder="No.HP" />
               </div>
               <div class="form-group">
-                <label for="thnAngkatan">Tahun Angkatan:</label>
-                <input type="text" class="form-control" name="thnAngkatan" value={this.state.thnAngkatan} onChange={this.onChange} placeholder="Tahun Angkatan" />
+                <label for="angkatan">Tahun Angkatan:</label>
+                <input type="text" class="form-control" name="angkatan" value={this.state.angkatan} onChange={this.onChange} placeholder="Tahun Angkatan" />
               </div>
               <div class="form-group">
-                <label for="statusMhs">Status Mahasiswa:</label>
-                <input type="text" class="form-control" name="statusMhs" value={this.state.statusMhs} onChange={this.onChange} placeholder="Status Mahasiswa" />
+                <label for="status">Status Mahasiswa:</label>
+                <input type="text" class="form-control" name="status" value={this.state.status} onChange={this.onChange} placeholder="Status Mahasiswa" />
               </div>
               <button type="submit" class="btn btn-success">Submit</button>
             </form>

@@ -1,5 +1,7 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
+import * as firebase from "firebase/app"
+import "firebase/auth";
+import "firebase/firestore";
+
 
 const settings = {timestampsInSnapshots: true};
 
@@ -21,6 +23,9 @@ const config = {
   measurementId: "G-TG4FBQP44T"
 
 };
+
+const fire = firebase.initializeApp(config);
+firebase.firestore().settings(settings);
 
 firebase.initializeApp(config);
 firebase.firestore().settings(settings);

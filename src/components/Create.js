@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import firebase from '../Firebase';
+import app from "../base.js";
 import { Link } from 'react-router-dom';
 
 class Create extends Component {
 
   constructor() {
     super();
-    this.ref = firebase.firestore().collection('mahasiswas');
+    this.ref = app.firestore().collection('mahasiswas');
     this.state = {
       nim: '',
       nama: '',
       alamat: '',
-      noHP: '',
-      thnAngkatan: '',
-      statusMhs: '',
+      hP: '',
+      angkatan: '',
+      status: '',
     };
   }
   
@@ -26,23 +26,23 @@ class Create extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { nim, nama, alamat, noHP, thnAngkatan, statusMhs } = this.state;
+    const { nim, nama, alamat, hP, angkatan, status } = this.state;
 
     this.ref.add({
       nim,
       nama,
       alamat,
-      noHP,
-      thnAngkatan,
-      statusMhs
+      hP,
+      angkatan,
+      status
     }).then((docRef) => {
       this.setState({
         nim: '',
         nama: '',
         alamat: '',
-        noHP: '',
-        thnAngkatan: '',
-        statusMhs: '',
+        hP: '',
+        angkatan: '',
+        status: '',
       });
       this.props.history.push("/")
     })
@@ -52,7 +52,7 @@ class Create extends Component {
   }
 
   render() {
-    const { nim, nama, alamat, noHP, thnAngkatan, statusMhs } = this.state;
+    const { nim, nama, alamat, hP, angkatan, status } = this.state;
     return (
       <div class="container">
         <div class="panel panel-default">
@@ -77,16 +77,16 @@ class Create extends Component {
                 <input type="text" class="form-control" name="alamat" value={alamat} onChange={this.onChange} placeholder="Alamat" />
               </div>
               <div class="form-group">
-                <label for="noHP">No.HP:</label>
-                <input type="text" class="form-control" name="noHP" value={noHP} onChange={this.onChange} placeholder="No.HP" />
+                <label for="hP">No.HP:</label>
+                <input type="text" class="form-control" name="hP" value={hP} onChange={this.onChange} placeholder="No.HP" />
               </div>
               <div class="form-group">
-                <label for="thnAngkatan">Tahun Angkatan:</label>
-                <input type="text" class="form-control" name="thnAngkatan" value={thnAngkatan} onChange={this.onChange} placeholder="Tahun Angkatan" />
+                <label for="angkatan">Tahun Angkatan:</label>
+                <input type="text" class="form-control" name="angkatan" value={angkatan} onChange={this.onChange} placeholder="Tahun Angkatan" />
               </div>
               <div class="form-group">
-                <label for="statusMhs">Status Mahasiswa:</label>
-                <input type="text" class="form-control" name="statusMhs" value={statusMhs} onChange={this.onChange} placeholder="Status Mahasiswa" />
+                <label for="status">Status Mahasiswa:</label>
+                <input type="text" class="form-control" name="status" value={status} onChange={this.onChange} placeholder="Status Mahasiswa" />
               </div>
               <button type="submit" class="btn btn-success">Submit</button>
             </form>
